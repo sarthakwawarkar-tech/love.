@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>For You ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- ===================== FONTS ===================== -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Playfair+Display:ital,wght@1,500&display=swap" rel="stylesheet">
+
+<!-- ===================== STYLES ===================== -->
+<style>
+
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- BODY ---------- */
+body {
+  height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #2b1055, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  color: #fff;
+}
+
+/* ---------- CARD ---------- */
+.card {
+  width: 360px;
+  max-width: 90%;
+  padding: 48px 36px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  border-radius: 24px;
+  text-align: center;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.45);
+  position: relative;
+  z-index: 2;
+}
+
+/* ---------- TEXT ---------- */
+.title {
+  font-size: 2.3rem;
+  font-weight: 600;
+}
+
+.subtitle {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* ---------- MAIN HEART ---------- */
+.main-heart {
+  width: 90px;
+  height: 90px;
+  background: #ff5c8d;
+  margin: 36px auto 44px;
+  position: relative;
+  transform: rotate(-45deg);
+  animation: pulse 1.2s infinite ease-in-out;
+}
+
+.main-heart::before,
+.main-heart::after {
+  content: "";
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  background: #ff5c8d;
+  border-radius: 50%;
+}
+
+.main-heart::before { top: -45px; left: 0; }
+.main-heart::after  { left: 45px; top: 0; }
+
+@keyframes pulse {
+  0%,100% { transform: scale(1) rotate(-45deg); }
+  50%     { transform: scale(1.15) rotate(-45deg); }
+}
+
+/* ---------- BUTTONS ---------- */
+.buttons {
+  position: relative;
+  height: 72px;
+}
+
+button {
+  padding: 14px 36px;
+  border-radius: 32px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#yes {
+  background: #2effb2;
+  color: #000;
+  font-weight: 600;
+}
+
+#yes:hover {
+  transform: scale(1.1);
+}
+
+#no {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.6);
+  position: absolute;
+  left: 180px;
+}
+
+/* ---------- SMALL HEARTS ---------- */
+.small-heart {
+  position: fixed;
+  font-size: 18px;
+  color: #ffb6c1;
+  transition: all 1.6s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* ---------- HEART MESSAGE ---------- */
+.heart-message {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  text-align: center;
+  line-height: 1.5;
+  color: #ffe4ea;
+  opacity: 0;
+  animation: fadeIn 1.4s ease forwards;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -45%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 480px) {
+
+  .card {
+    padding: 36px 24px;
+  }
+
+  .title {
+    font-size: 1.9rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .main-heart {
+    width: 70px;
+    height: 70px;
+  }
+
+  .main-heart::before,
+  .main-heart::after {
+    width: 70px;
+    height: 70px;
+  }
+
+  .main-heart::before { top: -35px; }
+  .main-heart::after  { left: 35px; }
+
+  #no {
+    left: 120px;
+  }
+
+  .small-heart {
+    font-size: 14px;
+  }
+
+  .heart-message {
+    font-size: 1.1rem;
+    padding: 0 18px;
+  }
+}
+.heart-caption {
+  position: fixed;
+  left: 50%;
+  top: calc(50% + 220px); /* heart ke niche */
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: #ffd1dc; /* light pink */
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  pointer-events: none;
+  z-index: 4;
+}
+
+@media (max-width: 480px) {
+  .heart-caption {
+    top: calc(45% + 140px); /* mobile adjustment */
+    font-size: 1.05rem;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ===================== MUSIC ===================== -->
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_aa0ffbd0c1.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ===================== CARD ===================== -->
+<div class="card" id="card">
+  <div class="title">I Love You ❤️</div>
+  <div class="subtitle">Will you be mine?</div>
+
+  <div class="main-heart"></div>
+
+  <div class="buttons">
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
+  </div>
+</div>
+
+<!-- ===================== SCRIPT ===================== -->
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn  = document.getElementById("no");
+const card   = document.getElementById("card");
+const music  = document.getElementById("music");
+
+let musicStarted = false;
+
+/* ---------- MUSIC START ON INTERACTION ---------- */
+document.body.addEventListener("click", () => {
+  if (!musicStarted) {
+    music.play();
+    musicStarted = true;
+  }
+});
+
+/* ---------- SMART NO BUTTON ---------- */
+noBtn.addEventListener("mousemove", () => {
+  const box = card.getBoundingClientRect();
+  const maxX = box.width - noBtn.offsetWidth;
+  const maxY = box.height - noBtn.offsetHeight;
+
+  noBtn.style.left = Math.random() * maxX + "px";
+  noBtn.style.top  = Math.random() * maxY + "px";
+});
+
+/* ---------- YES CLICK FINAL MAGIC ---------- */
+yesBtn.addEventListener("click", () => {
+
+  /* vibration */
+  if (navigator.vibrate) {
+    navigator.vibrate([200, 100, 200]);
+  }
+
+  card.style.display = "none";
+
+  const hearts = [];
+  const total = 90;
+
+  const isMobile = window.innerWidth < 480;
+  const scale = isMobile ? 8 : 11;
+
+  const centerX = window.innerWidth / 2;
+  const centerY = isMobile ? window.innerHeight * 0.45 : window.innerHeight / 2;
+
+  /* create small hearts */
+  for (let i = 0; i < total; i++) {
+    const h = document.createElement("div");
+    h.className = "small-heart";
+    h.innerHTML = "💗";
+    h.style.left = Math.random() * window.innerWidth + "px";
+    h.style.top  = Math.random() * window.innerHeight + "px";
+    document.body.appendChild(h);
+    hearts.push(h);
+  }
+
+  /* form heart outline */
+  setTimeout(() => {
+    hearts.forEach((h, i) => {
+      const t = (Math.PI * 2 * i) / total;
+
+      const x = scale * 16 * Math.pow(Math.sin(t), 3);
+      const y = -scale * (
+        13 * Math.cos(t)
+        - 5 * Math.cos(2 * t)
+        - 2 * Math.cos(3 * t)
+        - Math.cos(4 * t)
+      );
+
+      h.style.left = centerX + x + "px";
+      h.style.top  = centerY + y + "px";
+    });
+  }, 300);
+
+  /* message inside heart */
+  setTimeout(() => {
+    const msg = document.createElement("div");
+    msg.className = "heart-message";
+    msg.innerHTML = `
+      You are my today,<br>
+      and all my tomorrows ❤️
+    `;
+    document.body.appendChild(msg);
+  }, 1600);
+  // ❤️ Text below the heart
+setTimeout(() => {
+  const caption = document.createElement("div");
+  caption.className = "heart-caption";
+  caption.innerHTML = `I love you ❤️`;
+  document.body.appendChild(caption);
+}, 1800);
+
+
+});
+</script>
+
+</body>
+</html>
